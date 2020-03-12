@@ -1,0 +1,15 @@
+﻿@model IEnumerable<CommunityToolShedCore.Models.User>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@foreach (var user in Model)
+{
+    <h1> @user.FirstName</h1>
+  
+}
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
