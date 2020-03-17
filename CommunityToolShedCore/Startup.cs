@@ -31,8 +31,12 @@ namespace CommunityToolShedCore
             services.AddDbContextPool<Context>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<IdentityUser, IdentityRole>()
-                .AddEntityFrameworkStores<Context>();
+            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            {
+                options.Password.RequiredLength = 10;
+                options.Password.RequiredUniqueChars = 3;
+                options.Password.RequireNonAlphanumeric = false;
+            }).AddEntityFrameworkStores<Context>();
 
             services.AddControllersWithViews();
             services.AddScoped<IUserRepository, SQLUserRepository>();
