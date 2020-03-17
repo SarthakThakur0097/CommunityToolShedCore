@@ -4,14 +4,16 @@ using CommunityToolShedCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CommunityToolShedCore.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20200317165558_AddingIdentity")]
+    partial class AddingIdentity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,18 +46,6 @@ namespace CommunityToolShedCore.Migrations
                             Id = 1,
                             FirstName = "John",
                             LastName = "Doe"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            FirstName = "Mary",
-                            LastName = "Smith"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            FirstName = "Will",
-                            LastName = "Iam"
                         });
                 });
 

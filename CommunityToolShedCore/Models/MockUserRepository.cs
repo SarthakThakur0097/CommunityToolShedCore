@@ -13,9 +13,9 @@ namespace CommunityToolShedCore.Models
         {
             _userList = new List<User>()
             {
-                new User() {Id = 1, FirstName = "Joan", LastName = "Deb"},
-                new User() {Id = 2, FirstName = "Dave", LastName = "Joe"},
-                new User() {Id = 3, FirstName = "Clyde", LastName = "Will"}
+                new User() {FirstName = "Joan", LastName = "Deb"},
+                new User() {FirstName = "Dave", LastName = "Joe"},
+                new User() {FirstName = "Clyde", LastName = "Will"}
             };
         }
         public User Add(User user)

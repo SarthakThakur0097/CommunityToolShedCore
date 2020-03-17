@@ -12,6 +12,7 @@ using Microsoft.Extensions.Hosting;
 using CommunityToolShedCore.Data;
 using Microsoft.AspNetCore.Http;
 using CommunityToolShedCore.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace CommunityToolShedCore
 {
@@ -29,6 +30,9 @@ namespace CommunityToolShedCore
         {
             services.AddDbContextPool<Context>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<Context>();
 
             services.AddControllersWithViews();
             services.AddScoped<IUserRepository, SQLUserRepository>();
@@ -49,7 +53,7 @@ namespace CommunityToolShedCore
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseAuthentication();
             app.UseRouting();
 
             app.UseAuthorization();
