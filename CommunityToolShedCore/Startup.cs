@@ -13,6 +13,8 @@ using CommunityToolShedCore.Data;
 using Microsoft.AspNetCore.Http;
 using CommunityToolShedCore.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace CommunityToolShedCore
 {
@@ -39,6 +41,13 @@ namespace CommunityToolShedCore
             }).AddEntityFrameworkStores<Context>();
 
             services.AddControllersWithViews();
+            services.AddMvc(options => {
+                var policy = new AuthorizationPolicyBuilder()
+                                       .RequireAuthenticatedUser()
+                                       .Build();
+                options.Filters.Add(new AuthorizeFilter(policy));
+
+            }).AddXmlSerializerFormatters();
             services.AddScoped<IUserRepository, SQLUserRepository>();
         }
 
