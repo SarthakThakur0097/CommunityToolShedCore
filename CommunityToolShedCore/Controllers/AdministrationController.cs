@@ -1,5 +1,6 @@
 ﻿using CommunityToolShedCore.Models;
 using CommunityToolShedCore.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,10 @@ using System.Threading.Tasks;
 
 namespace CommunityToolShedCore.Controllers
 {
+
+    [Authorize(Roles ="Admin")]
+    //[Authorize(Roles = "Users")]
+
     public class AdministrationController : Controller
     {
         private readonly RoleManager<IdentityRole> roleManager;
