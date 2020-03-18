@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using CommunityToolShedCore.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CommunityToolShedCore.Controllers
 {
+
     public class HomeController : Controller
     {
         private readonly Context _context;
-
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger, Context context)
@@ -21,10 +22,18 @@ namespace CommunityToolShedCore.Controllers
             _context = context;
         }
 
+        [AllowAnonymous]
         public IActionResult Index()
         {
             
             return View(_context.Users.ToList());
+        }
+
+        [HttpGet]
+        [Authorize]
+        public IActionResult Create()
+        {
+            return View();
         }
 
         public IActionResult Privacy()

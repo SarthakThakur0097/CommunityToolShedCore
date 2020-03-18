@@ -1,10 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CommunityToolShedCore.Models
 {
     public class User
-    { 
-        public User(){}
+    {
+        public User() { }
 
         public User(string lastName, string firstName)
         {
@@ -17,7 +19,9 @@ namespace CommunityToolShedCore.Models
             LastName = lastName;
             FirstName = firstName;
         }
+
         public int Id { get; set; }
+
         [Required]
         public string LastName { get; set; }
         [Required]

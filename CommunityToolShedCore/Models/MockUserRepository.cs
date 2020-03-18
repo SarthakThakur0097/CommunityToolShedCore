@@ -13,9 +13,9 @@ namespace CommunityToolShedCore.Models
         {
             _userList = new List<User>()
             {
-                new User() {Id = 1, FirstName = "Joan", LastName = "Deb"},
-                new User() {Id = 2, FirstName = "Dave", LastName = "Joe"},
-                new User() {Id = 3, FirstName = "Clyde", LastName = "Will"}
+                new User() {FirstName = "Joan", LastName = "Deb"},
+                new User() {FirstName = "Dave", LastName = "Joe"},
+                new User() {FirstName = "Clyde", LastName = "Will"}
             };
         }
         public User Add(User user)
@@ -27,7 +27,7 @@ namespace CommunityToolShedCore.Models
 
         public User Delete(int Id)
         {
-            User user = _userList.FirstOrDefault(u => u.Id == Id);
+            User user = _userList.FirstOrDefault(u => u.Id.Equals(Id));
             if(user!=null)
             {
                 _userList.Remove(user);
@@ -42,7 +42,7 @@ namespace CommunityToolShedCore.Models
 
         public User GetById(int Id)
         {
-            return _userList.FirstOrDefault(u => u.Id == Id);
+            return _userList.FirstOrDefault(u => u.Id.Equals(Id));
         }
 
         public User Update(User userChanges)
