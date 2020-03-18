@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CommunityToolShedCore
 {
-    public class Context: IdentityDbContext
+    public class Context: IdentityDbContext<ApplicationUser>
     {
         public Context(DbContextOptions<Context> options) :base(options){}
 

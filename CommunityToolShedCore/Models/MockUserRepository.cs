@@ -27,7 +27,7 @@ namespace CommunityToolShedCore.Models
 
         public User Delete(int Id)
         {
-            User user = _userList.FirstOrDefault(u => u.Id == Id);
+            User user = _userList.FirstOrDefault(u => u.Id.Equals(Id));
             if(user!=null)
             {
                 _userList.Remove(user);
@@ -42,7 +42,7 @@ namespace CommunityToolShedCore.Models
 
         public User GetById(int Id)
         {
-            return _userList.FirstOrDefault(u => u.Id == Id);
+            return _userList.FirstOrDefault(u => u.Id.Equals(Id));
         }
 
         public User Update(User userChanges)

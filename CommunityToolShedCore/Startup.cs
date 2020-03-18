@@ -33,7 +33,7 @@ namespace CommunityToolShedCore
             services.AddDbContextPool<Context>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {
                 options.Password.RequiredLength = 10;
                 options.Password.RequiredUniqueChars = 3;
@@ -46,7 +46,6 @@ namespace CommunityToolShedCore
                                        .RequireAuthenticatedUser()
                                        .Build();
                 options.Filters.Add(new AuthorizeFilter(policy));
-
             }).AddXmlSerializerFormatters();
             services.AddScoped<IUserRepository, SQLUserRepository>();
         }

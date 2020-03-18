@@ -20,5 +20,9 @@ namespace CommunityToolShedCore.ViewModels
         [Compare("Password",
             ErrorMessage = "Password and confirmation password do not match")]
         public string ConfirmPassword { get; set; }
+
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
     }
 }
