@@ -5,33 +5,33 @@ namespace CommunityToolShedCore.Models
 {
     public class MockUserRepository : IUserRepository
     {
-        private List<User> _userList;
+        private List<ApplicationUser> _userList;
 
         public MockUserRepository()
         {
-            _userList = new List<User>()
+            _userList = new List<ApplicationUser>()
             {
-                new User() {FirstName = "Joan", LastName = "Deb"},
-                new User() {FirstName = "Dave", LastName = "Joe"},
-                new User() {FirstName = "Clyde", LastName = "Will"}
+                new ApplicationUser() {FirstName = "Joan", LastName = "Deb"},
+                new ApplicationUser() {FirstName = "Dave", LastName = "Joe"},
+                new ApplicationUser() {FirstName = "Clyde", LastName = "Will"}
             };
         }
 
-        public User GetById(int Id)
+        public ApplicationUser GetById(string Id)
         {
             return _userList.FirstOrDefault(u => u.Id.Equals(Id));
         }
 
-        public User Add(User user)
+        public ApplicationUser Add(ApplicationUser user)
         {
             user.Id = _userList.Max(u => u.Id) + 1;
             _userList.Add(user);
             return user;
         }
 
-        public User Delete(int Id)
+        public ApplicationUser Delete(string Id)
         {
-            User user = _userList.FirstOrDefault(u => u.Id.Equals(Id));
+            ApplicationUser user = _userList.FirstOrDefault(u => u.Id.Equals(Id));
             if(user!=null)
             {
                 _userList.Remove(user);
@@ -39,14 +39,14 @@ namespace CommunityToolShedCore.Models
             return user;
         }
 
-        public IEnumerable<User> GetAllUsers()
+        public IEnumerable<ApplicationUser> GetAllUsers()
         {
             return _userList;
         }
 
-        public User Update(User userChanges)
+        public ApplicationUser Update(ApplicationUser userChanges)
         {
-            User user = _userList.FirstOrDefault(u => u.Id == userChanges.Id);
+            ApplicationUser user = _userList.FirstOrDefault(u => u.Id == userChanges.Id);
             if (user != null)
             {
                 user.FirstName = userChanges.FirstName;

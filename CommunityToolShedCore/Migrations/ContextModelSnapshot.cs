@@ -90,45 +90,49 @@ namespace CommunityToolShedCore.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
-                });
-
-            modelBuilder.Entity("CommunityToolShedCore.Models.User", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Users");
 
                     b.HasData(
                         new
                         {
-                            Id = 1,
-                            FirstName = "John",
-                            LastName = "Doe"
+                            Id = "985f5838-eb4f-4f1d-8dd9-8431e89448da",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "7eefce2c-d2cc-4921-af86-f9e4a747c79c",
+                            Email = "NeoAnderson@gmail.com",
+                            EmailConfirmed = false,
+                            FirstName = "Neo",
+                            LastName = "Anderson",
+                            LockoutEnabled = false,
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "12c7d45f-7eaa-45f5-bee1-71df1c471966",
+                            TwoFactorEnabled = false
                         },
                         new
                         {
-                            Id = 2,
-                            FirstName = "Mary",
-                            LastName = "Smith"
+                            Id = "40730a25-6374-41a8-8455-d01663be34fe",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "8fabe171-2f3a-47d1-97bd-9a7a13fbb648",
+                            Email = "DaveWill@gmail.com",
+                            EmailConfirmed = false,
+                            FirstName = "Dave",
+                            LastName = "Will",
+                            LockoutEnabled = false,
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "5b838a75-55c7-4d03-91e3-b59e338996e1",
+                            TwoFactorEnabled = false
                         },
                         new
                         {
-                            Id = 3,
-                            FirstName = "Will",
-                            LastName = "Iam"
+                            Id = "3591d691-0499-428c-9aa8-e244a91f8fdc",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "943af0d7-da7a-492d-89d4-25b408135c83",
+                            Email = "SandraJosh@gmail.com",
+                            EmailConfirmed = false,
+                            FirstName = "Sandra",
+                            LastName = "Josh",
+                            LockoutEnabled = false,
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "ded89b1e-7478-4256-9b69-c0fe78c80288",
+                            TwoFactorEnabled = false
                         });
                 });
 

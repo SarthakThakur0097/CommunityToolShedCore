@@ -1,4 +1,5 @@
 ﻿using CommunityToolShedCore.Models;
+using CommunityToolShedCore.Data;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,7 +15,7 @@ namespace CommunityToolShedCore
             modelBuilder.Seed();
         }
 
-        public DbSet<User> Users { get; set; }
+        public DbSet<ApplicationUser> Users { get; set; }
 
     }
 }

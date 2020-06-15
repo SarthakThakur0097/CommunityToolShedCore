@@ -1,9 +1,5 @@
 ﻿using CommunityToolShedCore.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CommunityToolShedCore.Data
 {
@@ -11,25 +7,25 @@ namespace CommunityToolShedCore.Data
     {
         public static void Seed(this ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>().HasData(
-                new User
+            modelBuilder.Entity<ApplicationUser>().HasData(
+                new ApplicationUser
                 {
-                    Id = 1,
-                    FirstName = "Mary",
-                    LastName = "Yessir"
+                    Email = "NeoAnderson@gmail.com",
+                    FirstName = "Neo",
+                    LastName = "Anderson",
                 },
-                new User
+                new ApplicationUser
                 {
-                    Id = 2,
-                    FirstName = "Mary",
-                    LastName = "Yessir"
+                    Email = "DaveWill@gmail.com",
+                    FirstName = "Dave",
+                    LastName = "Will",
 
                 },
-                new User
+                new ApplicationUser
                 {
-                    Id = 3,
-                    FirstName = "Mary",
-                    LastName = "Yessir"
+                    Email = "SandraJosh@gmail.com",
+                    FirstName = "Sandra",
+                    LastName = "Josh",
                 }
             );
         }

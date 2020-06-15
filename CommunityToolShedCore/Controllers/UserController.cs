@@ -34,13 +34,13 @@ namespace CommunityToolShedCore.Controllers
 
         [HttpGet]
         [Authorize]
-        public IActionResult Edit(int id)
+        public IActionResult Edit(string id)
         {
             UserEditViewModel userEditViewModel;
 
             using (_context)
             {
-                User user = new SQLUserRepository(_context).GetById(id);
+                ApplicationUser user = new SQLUserRepository(_context).GetById(id);
 
 
                 userEditViewModel = new UserEditViewModel
@@ -60,7 +60,7 @@ namespace CommunityToolShedCore.Controllers
             {
                 using(_context)
                 { 
-                    User user = new SQLUserRepository(_context).GetById(model.Id);
+                    ApplicationUser user = new SQLUserRepository(_context).GetById(model.Id);
                     user.FirstName = model.FirstName;
                     user.LastName = model.LastName;
                     new SQLUserRepository(_context).Update(user);
