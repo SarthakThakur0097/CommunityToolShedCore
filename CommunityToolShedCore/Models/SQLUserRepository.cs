@@ -11,16 +11,16 @@ namespace CommunityToolShedCore.Models
         {
             this.context = context;
         }
-        public User Add(User user)
+        public ApplicationUser Add(ApplicationUser user)
         {
             context.Users.Add(user);
             context.SaveChanges();
             return user;
         }
 
-        public User Delete(int Id)
+        public ApplicationUser Delete(string Id)
         {
-            User user = context.Users.Find(Id);
+            ApplicationUser user = context.Users.Find(Id);
             if(user != null)
             {
                 context.Users.Remove(user);
@@ -29,18 +29,17 @@ namespace CommunityToolShedCore.Models
             return user;
         }
 
-
-        public IEnumerable<User> GetAllUsers()
+        public IEnumerable<ApplicationUser> GetAllUsers()
         {
             return context.Users;
         }
 
-        public User GetById(int Id)
+        public ApplicationUser GetById(string Id)
         {
             return context.Users.Find(Id);
         }
 
-        public User Update(User userChanges)
+        public ApplicationUser Update(ApplicationUser userChanges)
         {
             var updatedUser = context.Users.Attach(userChanges);
             updatedUser.State = Microsoft.EntityFrameworkCore.EntityState.Modified;

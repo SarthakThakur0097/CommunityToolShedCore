@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CommunityToolShedCore.Migrations
 {
-    public partial class AddingIdentity : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -39,7 +39,9 @@ namespace CommunityToolShedCore.Migrations
                     TwoFactorEnabled = table.Column<bool>(nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
-                    AccessFailedCount = table.Column<int>(nullable: false)
+                    AccessFailedCount = table.Column<int>(nullable: false),
+                    LastName = table.Column<string>(nullable: false),
+                    FirstName = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -151,6 +153,21 @@ namespace CommunityToolShedCore.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { "985f5838-eb4f-4f1d-8dd9-8431e89448da", 0, "7eefce2c-d2cc-4921-af86-f9e4a747c79c", "NeoAnderson@gmail.com", false, "Neo", "Anderson", false, null, null, null, null, null, false, "12c7d45f-7eaa-45f5-bee1-71df1c471966", false, null });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { "40730a25-6374-41a8-8455-d01663be34fe", 0, "8fabe171-2f3a-47d1-97bd-9a7a13fbb648", "DaveWill@gmail.com", false, "Dave", "Will", false, null, null, null, null, null, false, "5b838a75-55c7-4d03-91e3-b59e338996e1", false, null });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { "3591d691-0499-428c-9aa8-e244a91f8fdc", 0, "943af0d7-da7a-492d-89d4-25b408135c83", "SandraJosh@gmail.com", false, "Sandra", "Josh", false, null, null, null, null, null, false, "ded89b1e-7478-4256-9b69-c0fe78c80288", false, null });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

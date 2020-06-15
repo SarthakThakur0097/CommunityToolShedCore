@@ -4,10 +4,10 @@ namespace CommunityToolShedCore.Models
 {
     interface IUserRepository
     {
-        User GetById(int Id);
-        IEnumerable<User> GetAllUsers();
-        User Add(User user);
-        User Update(User userChanges);
-        User Delete(int Id);
+        ApplicationUser GetById(string Id);
+        IEnumerable<ApplicationUser> GetAllUsers();
+        ApplicationUser Add(ApplicationUser user);
+        ApplicationUser Update(ApplicationUser userChanges);
+        ApplicationUser Delete(string Id);
     }
 }

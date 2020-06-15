@@ -1,6 +1,5 @@
 ﻿using CommunityToolShedCore.Models;
 using CommunityToolShedCore.ViewModels;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -10,7 +9,7 @@ using System.Threading.Tasks;
 namespace CommunityToolShedCore.Controllers
 {
 
-    [Authorize(Roles ="Admin")]
+    //[Authorize(Roles ="Admin")]
     //[Authorize(Roles = "Users")]
 
     public class AdministrationController : Controller
@@ -29,14 +28,15 @@ namespace CommunityToolShedCore.Controllers
         public IActionResult ListRoles()
         {
             var roles = roleManager.Roles;
-            return View(roles);
 
+            return View(roles);
         }
 
         [HttpGet]
         public IActionResult ListUsers()
         {
             var users = userManager.Users;
+
             return View(users);
         }
         [HttpGet]
@@ -83,6 +83,7 @@ namespace CommunityToolShedCore.Controllers
             if (role == null)
             {
                 ViewBag.ErrorMessage = $"Role with Id = {id} cannot be found";
+
                 return View("NotFound");
             }
 
@@ -113,6 +114,7 @@ namespace CommunityToolShedCore.Controllers
             if (role == null)
             {
                 ViewBag.ErrorMessage = $"Role with Id = {model.Id} cannot be found";
+
                 return View("NotFound");
             }
             else

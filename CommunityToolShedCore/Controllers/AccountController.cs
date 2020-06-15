@@ -65,7 +65,7 @@ namespace CommunityToolShedCore.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> Login(LoginViewModel model)
+        public async Task<IActionResult> Login(LoginViewModel model, string returnUrl)
         {
             if (ModelState.IsValid)
             {
@@ -74,7 +74,14 @@ namespace CommunityToolShedCore.Controllers
 
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index", "Home");
+                    if(!string.IsNullOrEmpty(returnUrl) &&Url.IsLocalUrl(returnUrl)
+                    {
+                        return Redirect(returnUrl);
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
                 }
 
                 ModelState.AddModelError("", "Invalid Login Attempt");
