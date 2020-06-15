@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace CommunityToolShedCore.Models
 {
@@ -18,6 +16,12 @@ namespace CommunityToolShedCore.Models
                 new User() {FirstName = "Clyde", LastName = "Will"}
             };
         }
+
+        public User GetById(int Id)
+        {
+            return _userList.FirstOrDefault(u => u.Id.Equals(Id));
+        }
+
         public User Add(User user)
         {
             user.Id = _userList.Max(u => u.Id) + 1;
@@ -38,11 +42,6 @@ namespace CommunityToolShedCore.Models
         public IEnumerable<User> GetAllUsers()
         {
             return _userList;
-        }
-
-        public User GetById(int Id)
-        {
-            return _userList.FirstOrDefault(u => u.Id.Equals(Id));
         }
 
         public User Update(User userChanges)

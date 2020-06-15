@@ -1,5 +1,3 @@
-using System;
-
 namespace CommunityToolShedCore.Models
 {
     public class ErrorViewModel

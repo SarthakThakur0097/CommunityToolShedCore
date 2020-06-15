@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using CommunityToolShedCore.Models;
 using Microsoft.AspNetCore.Authorization;
+using CommunityToolShedCore.ViewModels;
 
 namespace CommunityToolShedCore.Controllers
 {
-
     public class HomeController : Controller
     {
         private readonly Context _context;
@@ -36,6 +33,35 @@ namespace CommunityToolShedCore.Controllers
             return View();
         }
 
+        [HttpGet]
+        [Authorize]
+        public IActionResult Edit(int id)
+        {
+            SQLUserRepository userRepo = new SQLUserRepository(_context);
+            User user = userRepo.GetById(id);
+
+            UserEditViewModel userEditViewModel = new UserEditViewModel
+            {
+                Id = user.Id,
+                FirstName = user.FirstName,
+                LastName = user.LastName
+            };
+
+            return View(userEditViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(UserEditViewModel model)
+        {
+            if(ModelState.IsValid)
+            {
+                User user = new SQLUserRepository(_context).GetById(model.Id);
+                user.FirstName = model.FirstName;
+                user.LastName = model.LastName;
+                new SQLUserRepository(_context).Update(user);
+            }
+            return RedirectToAction("index");
+        }
         public IActionResult Privacy()
         {
             return View();
