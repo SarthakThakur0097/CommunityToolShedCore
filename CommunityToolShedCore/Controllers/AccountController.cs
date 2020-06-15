@@ -74,7 +74,7 @@ namespace CommunityToolShedCore.Controllers
 
                 if (result.Succeeded)
                 {
-                    if(!string.IsNullOrEmpty(returnUrl))
+                    if(!string.IsNullOrEmpty(returnUrl) &&Url.IsLocalUrl(returnUrl)
                     {
                         return Redirect(returnUrl);
                     }
@@ -82,7 +82,6 @@ namespace CommunityToolShedCore.Controllers
                     {
                         return RedirectToAction("Index", "Home");
                     }
-                    return RedirectToAction("Index", "Home");
                 }
 
                 ModelState.AddModelError("", "Invalid Login Attempt");
