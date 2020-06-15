@@ -22,46 +22,9 @@ namespace CommunityToolShedCore.Controllers
         [AllowAnonymous]
         public IActionResult Index()
         {
-            
-            return View(_context.Users.ToList());
-        }
-
-        [HttpGet]
-        [Authorize]
-        public IActionResult Create()
-        {
             return View();
         }
 
-        [HttpGet]
-        [Authorize]
-        public IActionResult Edit(int id)
-        {
-            SQLUserRepository userRepo = new SQLUserRepository(_context);
-            User user = userRepo.GetById(id);
-
-            UserEditViewModel userEditViewModel = new UserEditViewModel
-            {
-                Id = user.Id,
-                FirstName = user.FirstName,
-                LastName = user.LastName
-            };
-
-            return View(userEditViewModel);
-        }
-
-        [HttpPost]
-        public IActionResult Edit(UserEditViewModel model)
-        {
-            if(ModelState.IsValid)
-            {
-                User user = new SQLUserRepository(_context).GetById(model.Id);
-                user.FirstName = model.FirstName;
-                user.LastName = model.LastName;
-                new SQLUserRepository(_context).Update(user);
-            }
-            return RedirectToAction("index");
-        }
         public IActionResult Privacy()
         {
             return View();
