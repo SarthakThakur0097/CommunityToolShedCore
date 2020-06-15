@@ -65,7 +65,7 @@ namespace CommunityToolShedCore.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> Login(LoginViewModel model)
+        public async Task<IActionResult> Login(LoginViewModel model, string returnUrl)
         {
             if (ModelState.IsValid)
             {
@@ -74,6 +74,14 @@ namespace CommunityToolShedCore.Controllers
 
                 if (result.Succeeded)
                 {
+                    if(!string.IsNullOrEmpty(returnUrl))
+                    {
+                        return Redirect(returnUrl);
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
                     return RedirectToAction("Index", "Home");
                 }
 
