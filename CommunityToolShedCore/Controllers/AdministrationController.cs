@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace CommunityToolShedCore.Controllers
 {
 
-    [Authorize(Roles ="Admin")]
+    //[Authorize(Roles ="Admin")]
     //[Authorize(Roles = "Users")]
 
     public class AdministrationController : Controller

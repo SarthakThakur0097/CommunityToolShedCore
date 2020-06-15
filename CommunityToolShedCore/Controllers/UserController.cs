@@ -66,7 +66,7 @@ namespace CommunityToolShedCore.Controllers
                     new SQLUserRepository(_context).Update(user);
                 }
             }
-            return RedirectToAction("index");
+            return RedirectToAction("Index");
         }
 
         public IActionResult Delete(UserEditViewModel model)

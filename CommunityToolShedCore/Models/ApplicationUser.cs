@@ -7,6 +7,14 @@ namespace CommunityToolShedCore.Models
     [NotMapped]
     public class ApplicationUser : IdentityUser
     {
+        public ApplicationUser() { }
+
+        public ApplicationUser(string lastName, string firstName)
+        {
+            LastName = lastName;
+            FirstName = firstName;
+        }
+
         [Required]
         public string LastName { get; set; }
         [Required]
