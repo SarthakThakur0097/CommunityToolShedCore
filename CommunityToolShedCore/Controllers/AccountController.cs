@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using CommunityToolShedCore.Models;
 using CommunityToolShedCore.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -24,7 +21,6 @@ namespace CommunityToolShedCore.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-
         public IActionResult Register()
         {
             //ViewData["User"]
@@ -51,6 +47,7 @@ namespace CommunityToolShedCore.Controllers
                     await signInManager.SignInAsync(user, isPersistent: false);
                     return RedirectToAction("Index", "Home");
                 }
+
                 foreach(var error in result.Errors)
                 {
                     ModelState.AddModelError("", error.Description);
@@ -65,6 +62,7 @@ namespace CommunityToolShedCore.Controllers
         {
             return View();
         }
+
         [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> Login(LoginViewModel model)
