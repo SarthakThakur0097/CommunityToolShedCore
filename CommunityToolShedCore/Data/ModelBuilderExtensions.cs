@@ -1,4 +1,5 @@
 ﻿using CommunityToolShedCore.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace CommunityToolShedCore.Data
@@ -28,6 +29,14 @@ namespace CommunityToolShedCore.Data
                     LastName = "Josh",
                 }
             );
+        }
+
+        public static void SeedRoles(RoleManager<IdentityRole> roleManager)
+        {
+            IdentityRole role = new IdentityRole();
+            role.Name = "Administrator";
+            IdentityResult roleResult = roleManager.
+            CreateAsync(role).Result;
         }
     }
 }
