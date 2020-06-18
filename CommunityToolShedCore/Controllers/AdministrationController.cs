@@ -219,5 +219,33 @@ namespace CommunityToolShedCore.Controllers
 
             return RedirectToAction("EditRole", new { id = roleId });
         }
+
+        public async Task<IActionResult> DeleteUser(string id)
+        {
+            var user = await userManager.FindByIdAsync(id);
+
+            if(user == null)
+            {
+                ViewBag.ErrorMessage = $"User with Id = {id} cannot be found";
+
+                return View("NotFound");
+            }
+            else
+            {
+                var result = await userManager.DeleteAsync(user);
+                
+                if(result.Succeeded)
+                {
+                    return RedirectToAction("ListUsers");
+                }
+
+                foreach(var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+
+                return View("ListUsers");
+            }
+        }
     }
 }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace CommunityToolShedCore.Models
 {
@@ -14,8 +10,8 @@ namespace CommunityToolShedCore.Models
             IsOpen = isOpen;
         }
         public int Id { get; set; }
-        public string  Name { get; set; }
         [Display(Name = "Open")]
+        public string  Name { get; set; }
         public bool IsOpen { get; set; }
 
         public override string ToString()

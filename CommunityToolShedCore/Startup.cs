@@ -45,7 +45,7 @@ namespace CommunityToolShedCore
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, RoleManager<IdentityRole> roleManager)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             if (env.IsDevelopment())
             {
@@ -57,8 +57,6 @@ namespace CommunityToolShedCore
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
-            ModelBuilderExtensions.SeedRoles(roleManager);
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
@@ -79,7 +77,6 @@ namespace CommunityToolShedCore
                 var context = serviceScope.ServiceProvider.GetRequiredService<Context>();
                 context.Database.Migrate();
             }
-
         }
     }
 }

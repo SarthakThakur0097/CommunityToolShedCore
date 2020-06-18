@@ -16,7 +16,8 @@ namespace CommunityToolShedCore
             modelBuilder.Seed();
         }
 
-        public DbSet<ApplicationUser> Users { get; set; }
+        override public DbSet<ApplicationUser> Users { get; set; }
+        public DbSet<Community> Communities { get; set; }
 
     }
 }

@@ -19,22 +19,13 @@ namespace CommunityToolShedCore.Controllers
             this.signInManager = signInManager;
         }
 
-        [HttpGet]
-        [AllowAnonymous]
-        public IActionResult Register()
-        {
-            //ViewData["User"]
-            return View();
-        }
-
-
         [AcceptVerbs("Get", "Post")]
         [AllowAnonymous]
         public async Task<IActionResult> IsEmailInUse(string email)
         {
             var user = await userManager.FindByEmailAsync(email);
 
-            if(user == null)
+            if (user == null)
             {
                 return Json(true);
             }
@@ -43,6 +34,15 @@ namespace CommunityToolShedCore.Controllers
                 return Json($"Email {email} is already in use");
             }
         }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult Register()
+        {
+            //ViewData["User"]
+            return View();
+        }
+
         [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> Register(RegisterViewModel model)
