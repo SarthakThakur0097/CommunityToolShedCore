@@ -3,6 +3,7 @@ using CommunityToolShedCore.Data;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using System.Linq;
 
 namespace CommunityToolShedCore
 {
@@ -14,6 +15,11 @@ namespace CommunityToolShedCore
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Seed();
+
+            foreach (var foreignKey in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
+            {
+                foreignKey.DeleteBehavior = DeleteBehavior.Restrict;
+            }
         }
 
         override public DbSet<ApplicationUser> Users { get; set; }
