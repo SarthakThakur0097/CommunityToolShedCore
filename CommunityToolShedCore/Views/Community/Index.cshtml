@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Community>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>All communities</h1>
+
+@if (Model.Any())
+{
+    <a asp-action="CreateCommunity" asp-controller="Community"
+       class="btn btn-primary mb-3" style="width:auto">
+        Add new community
+    </a>
+
+    foreach (var community in Model)
+    {
+        <div class="card mb-3">
+            <div class="card-header">
+                Community Id : @community.Id
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">@community.Name</h5>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <div class="card">
+        <div class="card-header">
+            No communities created yet
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">
+                Use the button below to add a community
+            </h5>
+            <a class="btn btn-primary" style="width:auto"
+               asp-controller="Community" asp-action="CreateCommunity">
+                Add new community
+            </a>
+        </div>
+    </div>
+}

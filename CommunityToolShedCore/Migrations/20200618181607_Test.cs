@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CommunityToolShedCore.Migrations
 {
-    public partial class Initial : Migration
+    public partial class Test : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -49,6 +49,20 @@ namespace CommunityToolShedCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Communities",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: true),
+                    IsOpen = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Communities", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -66,7 +80,7 @@ namespace CommunityToolShedCore.Migrations
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -87,7 +101,7 @@ namespace CommunityToolShedCore.Migrations
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -107,7 +121,7 @@ namespace CommunityToolShedCore.Migrations
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -125,13 +139,13 @@ namespace CommunityToolShedCore.Migrations
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_AspNetUserRoles_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -151,23 +165,23 @@ namespace CommunityToolShedCore.Migrations
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "985f5838-eb4f-4f1d-8dd9-8431e89448da", 0, "7eefce2c-d2cc-4921-af86-f9e4a747c79c", "NeoAnderson@gmail.com", false, "Neo", "Anderson", false, null, null, null, null, null, false, "12c7d45f-7eaa-45f5-bee1-71df1c471966", false, null });
+                values: new object[] { "23caf6bf-ddef-4b36-8434-3c64a5635be8", 0, "d9746574-548a-405e-ac38-53b935c3bc26", "NeoAnderson@gmail.com", false, "Neo", "Anderson", false, null, null, null, "AQAAAAEAACcQAAAAELq6+1vPzbk3Yo63sjNIa44iVvgombBvM0FCaj9vt7hHXWhaVI+ysn3URyl3jkx8kg==", null, false, "49fc6b1d-aa3d-45a3-b33a-46f04dba8c87", false, "NeoAnderson@gmail.com" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "40730a25-6374-41a8-8455-d01663be34fe", 0, "8fabe171-2f3a-47d1-97bd-9a7a13fbb648", "DaveWill@gmail.com", false, "Dave", "Will", false, null, null, null, null, null, false, "5b838a75-55c7-4d03-91e3-b59e338996e1", false, null });
+                values: new object[] { "4dca26bf-11ea-4d18-9dfa-d81d69dd42fc", 0, "96f5ea0d-c353-405f-bc3e-60112382faa4", "DaveWill@gmail.com", false, "Dave", "Will", false, null, null, null, "AQAAAAEAACcQAAAAELq6+1vPzbk3Yo63sjNIa44iVvgombBvM0FCaj9vt7hHXWhaVI+ysn3URyl3jkx8kg==", null, false, "f01b41b9-7503-4493-9716-69c339abff73", false, "DaveWill@gmail.com" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "3591d691-0499-428c-9aa8-e244a91f8fdc", 0, "943af0d7-da7a-492d-89d4-25b408135c83", "SandraJosh@gmail.com", false, "Sandra", "Josh", false, null, null, null, null, null, false, "ded89b1e-7478-4256-9b69-c0fe78c80288", false, null });
+                values: new object[] { "561201cf-fbe1-4cd3-9740-81638c556224", 0, "60af4884-140a-440d-b92f-256f2fca3d2c", "SandraJosh@gmail.com", false, "Sandra", "Josh", false, null, null, null, "AQAAAAEAACcQAAAAELq6+1vPzbk3Yo63sjNIa44iVvgombBvM0FCaj9vt7hHXWhaVI+ysn3URyl3jkx8kg==", null, false, "d17512a3-1917-41fa-a019-c230b3fb1131", false, "SandraJosh@gmail.com" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -225,6 +239,9 @@ namespace CommunityToolShedCore.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Communities");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
