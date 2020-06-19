@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CommunityToolShedCore.Models;
+using CommunityToolShedCore.ViewModels;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace CommunityToolShedCore.Controllers
@@ -12,15 +14,39 @@ namespace CommunityToolShedCore.Controllers
         {
             _context = context;
         }
+
+        [HttpGet]
         public IActionResult Index()
         {
-            return View();
+            SQLCommunityRepository communityRepository;
+
+            using(_context)
+            {
+                communityRepository = new SQLCommunityRepository(_context);
+                
+                return View(communityRepository.GetAllCommunities());
+            }
         }
         
+        
         [HttpGet]
-        public IActionResult Create()
+        public IActionResult CreateCommunity()
         {
-            return View();
+            CreateCommunityViewModel viewModel = new CreateCommunityViewModel(); 
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public IActionResult CreateCommunity(CreateCommunityViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Community communityToAdd = new Community(model.Name, model.IsOpen);
+                using(_context){ new SQLCommunityRepository(_context).Add(communityToAdd); }
+            }
+
+            return RedirectToAction("Index");
         }
     }
 }

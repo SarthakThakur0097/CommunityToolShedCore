@@ -5,11 +5,20 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - CommunityToolShedCore</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <script src="~/lib/jquery/dist/jquery.js"></script>
-    <script src="~/lib/jquery-validate/jquery.validate.js"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
-    <link rel="stylesheet" href="~/css/site.css" />
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/jquery-validate/jquery.validate.js"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+        <link rel="stylesheet" href="~/css/site.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/jquery-validate/jquery.validate.js"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+        <link rel="stylesheet" href="~/css/site.css" />
+    </environment>
 </head>
 <body>
     <div class="container">
@@ -26,7 +35,7 @@
                     <div class="navbar-collapse collapse d-sm-inline-flex flex">
                         <ul class="navbar-nav flex-grow-1">
 
-                            @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                            @if (signInManager.IsSignedIn(User) @*&& User.IsInRole("Admin")*@)
                             {
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
@@ -38,6 +47,8 @@
                                            asp-action="ListUsers">Users</a>
                                         <a class="dropdown-item" asp-controller="Administration"
                                            asp-action="ListRoles">Roles</a>
+                                        <a class="dropdown-item" asp-controller="Community"
+                                           asp-action="Index">Communities</a>
                                     </div>
                                 </li>
                             }

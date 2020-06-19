@@ -10,8 +10,8 @@ namespace CommunityToolShedCore.Models
             IsOpen = isOpen;
         }
         public int Id { get; set; }
-        [Display(Name = "Open")]
         public string  Name { get; set; }
+        [Display(Name = "Open")]
         public bool IsOpen { get; set; }
 
         public override string ToString()

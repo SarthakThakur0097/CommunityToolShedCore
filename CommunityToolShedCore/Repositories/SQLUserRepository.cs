@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 
 namespace CommunityToolShedCore.Models
 {
@@ -41,7 +42,7 @@ namespace CommunityToolShedCore.Models
         public ApplicationUser Update(ApplicationUser userChanges)
         {
             var updatedUser = context.Users.Attach(userChanges);
-            updatedUser.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            updatedUser.State = EntityState.Modified;
             context.SaveChanges();
             return userChanges;
         }
