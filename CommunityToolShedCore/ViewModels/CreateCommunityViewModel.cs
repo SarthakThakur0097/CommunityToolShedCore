@@ -8,8 +8,8 @@ namespace CommunityToolShedCore.ViewModels
 {
     public class CreateCommunityViewModel
     {
-        [Display(Name = "Open")]
         public string Name { get; set; }
+        [Display(Name = "Open")]
         public bool IsOpen { get; set; }
     }
 }
