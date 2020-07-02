@@ -39,6 +39,11 @@ namespace CommunityToolShedCore.Models
             return context.Users.Find(Id);
         }
 
+        //public IList<ApplicationUser> GetAllMembersByCommunityId(int Id)
+        //{
+        //    return context.Users.Find(Id).;
+        //}
+
         public ApplicationUser Update(ApplicationUser userChanges)
         {
             var updatedUser = context.Users.Attach(userChanges);

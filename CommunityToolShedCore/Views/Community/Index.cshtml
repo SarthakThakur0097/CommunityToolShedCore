@@ -21,6 +21,12 @@
             <div class="card-body">
                 <h5 class="card-title">@community.Name</h5>
             </div>
+            <div>
+                <a class="btn btn-primary" style="width:auto"
+                   asp-controller="Community" asp-action="Members" asp-route-Id="@community.Id">
+                    Members
+                </a>
+            </div>
         </div>
     }
 }

@@ -27,8 +27,7 @@ namespace CommunityToolShedCore.Controllers
                 return View(communityRepository.GetAllCommunities());
             }
         }
-        
-        
+            
         [HttpGet]
         public IActionResult CreateCommunity()
         {
@@ -47,6 +46,16 @@ namespace CommunityToolShedCore.Controllers
             }
 
             return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult Members(int Id)
+        {
+            using(_context)
+            {
+                //new SQLUserRepository(_context).GetById(Id);
+            }
+            return View();
         }
     }
 }
