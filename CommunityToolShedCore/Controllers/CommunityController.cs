@@ -61,7 +61,7 @@ namespace CommunityToolShedCore.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddMember(int id)
+        public IActionResult AddMember(string id)
         {
 
             return View();

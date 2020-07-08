@@ -39,7 +39,7 @@ namespace CommunityToolShedCore.Models
             return user;
         }
 
-        public IEnumerable<ApplicationUser> GetAllUsers()
+        public IList<ApplicationUser> GetAllUsers()
         {
             return _userList;
         }
