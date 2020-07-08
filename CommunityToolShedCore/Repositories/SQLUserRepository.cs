@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
 
 namespace CommunityToolShedCore.Models
@@ -29,15 +30,20 @@ namespace CommunityToolShedCore.Models
             return user;
         }
 
-        public IEnumerable<ApplicationUser> GetAllUsers()
+        public IList<ApplicationUser> GetAllUsers()
         {
-            return context.Users;
+            return context.Users.ToList();
         }
 
         public ApplicationUser GetById(string Id)
         {
             return context.Users.Find(Id);
         }
+
+        //public IList<ApplicationUser> GetAllMembersByCommunityId(int Id)
+        //{
+        //    return context.Users.Find(Id).;
+        //}
 
         public ApplicationUser Update(ApplicationUser userChanges)
         {

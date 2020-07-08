@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace CommunityToolShedCore.Models
 {
@@ -24,5 +25,6 @@ namespace CommunityToolShedCore.Models
         public string LastName { get; set; }
         [Required]
         public string FirstName { get; set; }
+        public ICollection<Community> Communities { get; set; }
     }
 }

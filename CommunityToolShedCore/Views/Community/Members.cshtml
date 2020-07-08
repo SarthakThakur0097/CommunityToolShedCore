@@ -1,0 +1,56 @@
+﻿@model CommunityToolShedCore.ViewModels.CommunityMembersViewModel
+
+@{
+    ViewData["Title"] = "Members";
+}
+
+<h1>Members</h1>
+
+@if (Model.CommunityMembers.Any())
+{
+    <a class="btn btn-primary mb-3" style="width:auto" asp-action="CreateRole"
+       asp-controller="Administration">Add new role</a>
+
+    foreach (var role in Model.CommunityMembers)
+    {
+        <div class="card mb-3">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Member Name</th>
+                    </tr>
+                </thead>
+                <tbody id="myTable">
+                    @foreach (var communityMember in Model.CommunityMembers)
+                    {
+                        <tr>
+                            <td>(@communityMember.Member.FirstName + communityMember.Member.LastName)</td>
+                                
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+}
+else
+{
+    <div class="card">
+        <div class="card-header">
+            No roles created yet
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">
+                Use the button below to create a role
+            </h5>
+            <a class="btn btn-primary" style="width:auto"
+               asp-controller="Community" asp-action="AddMember">
+                Add Member
+            </a>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    <script src="~/js/CustomScript.js"></script>
+}

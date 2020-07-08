@@ -4,7 +4,6 @@ using Microsoft.Extensions.Logging;
 using CommunityToolShedCore.Models;
 using Microsoft.AspNetCore.Authorization;
 
-
 namespace CommunityToolShedCore.Controllers
 {
     public class HomeController : Controller

@@ -1,0 +1,34 @@
+﻿@model CommunityToolShedCore.ViewModels.AddMemberViewModel
+@{
+    ViewData["Title"] = "AddMember";
+}
+
+<h1>All Users</h1>
+
+<div>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>User Id</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="myTable">
+            @foreach (var user in Model.AllUsers)
+            {
+                <tr>
+                    <td>@user.Id</td>
+                    <td>@user.FirstName</td>
+                    <td>@user.LastName</td>
+                    <td>
+                        <form asp-action="AddMember" asp-route-id="@user.Id" method="post">
+                            <button type="submit" class="btn btn-success">Add</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+            </tbody>
+    </table>
+</div>

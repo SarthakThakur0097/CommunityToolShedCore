@@ -2,6 +2,7 @@
 using CommunityToolShedCore.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
 
 namespace CommunityToolShedCore.Controllers
 {
@@ -27,8 +28,7 @@ namespace CommunityToolShedCore.Controllers
                 return View(communityRepository.GetAllCommunities());
             }
         }
-        
-        
+            
         [HttpGet]
         public IActionResult CreateCommunity()
         {
@@ -47,6 +47,39 @@ namespace CommunityToolShedCore.Controllers
             }
 
             return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult AddMember()
+        {
+            AddMemberViewModel viewModel = new AddMemberViewModel();
+            using(_context)
+            {
+                viewModel.AllUsers = new SQLUserRepository(_context).GetAllUsers();
+            }
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public IActionResult AddMember(string id)
+        {
+
+            return View();
+        }
+        
+        [HttpGet]
+        public IActionResult Members(int Id)
+        {
+            CommunityMembersViewModel viewModel = new CommunityMembersViewModel();
+            using(_context)
+            {
+                IList<CommunityMember> CommunityMembers = new SQLCommunityRepository(_context).GetAllMembersByCommunityId(Id);
+
+                viewModel.CommunityMembers = CommunityMembers;
+ 
+            }
+
+            return View(viewModel);
         }
     }
 }
