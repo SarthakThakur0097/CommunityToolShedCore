@@ -24,7 +24,6 @@ namespace CommunityToolShedCore
             {
                 foreignKey.DeleteBehavior = DeleteBehavior.Restrict;
             }
-
         }
 
         override public DbSet<ApplicationUser> Users { get; set; }
