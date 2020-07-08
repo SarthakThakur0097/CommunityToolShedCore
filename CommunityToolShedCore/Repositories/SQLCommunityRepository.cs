@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
 
 namespace CommunityToolShedCore.Models
@@ -41,6 +42,14 @@ namespace CommunityToolShedCore.Models
             return context.Communities.Find(Id);
         }
 
+        public IList<CommunityMember> GetAllMembersByCommunityId(int id)
+        {
+            return context.CommunityMembers
+                .Include(c => c.Member)
+                .Include(c => c.Community)
+                .Where(c => c.Id == id)
+                .ToList();
+        }
         public Community Update(Community communityChanges)
         {
             var updatedCommunity = context.Communities.Attach(communityChanges);
@@ -49,11 +58,6 @@ namespace CommunityToolShedCore.Models
             context.SaveChanges();
 
             return communityChanges;
-        }
-
-        public IList<ApplicationUser> GetAllCommunityMembersById(int id)
-        {
-            return null; 
         }
     }
 }
