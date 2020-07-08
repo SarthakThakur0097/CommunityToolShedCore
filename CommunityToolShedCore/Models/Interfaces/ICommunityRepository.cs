@@ -4,7 +4,7 @@ namespace CommunityToolShedCore.Models
 {
     interface ICommunityRepository
     {
-        Community GetById(string Id);
+        Community GetById(int Id);
         IEnumerable<Community> GetAllCommunities();
         Community Add(Community community);
         Community Update(Community communityChanges);
