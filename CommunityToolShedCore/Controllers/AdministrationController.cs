@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace CommunityToolShedCore.Controllers
 {
 
-    [Authorize(Roles ="Admin")]
+    [Authorize(Policy ="AdminRolePolicy")]
     public class AdministrationController : Controller
     {
         private readonly RoleManager<IdentityRole> roleManager;

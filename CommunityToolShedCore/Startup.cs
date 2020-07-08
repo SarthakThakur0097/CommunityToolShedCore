@@ -45,7 +45,10 @@ namespace CommunityToolShedCore
             {
                 options.AddPolicy("DeleteRolePolicy",
                                     policy => policy.RequireClaim("Delete Role")
-                                                    .RequireClaim("Create Role"));
+                                    .RequireClaim("Create Role"));
+
+                options.AddPolicy("AdminRolePolicy",
+                                   policy => policy.RequireRole("Admin"));
             });
         }
 
