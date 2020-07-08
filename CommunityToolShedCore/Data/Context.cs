@@ -21,7 +21,7 @@ namespace CommunityToolShedCore
             }
 
             modelBuilder.Entity<ApplicationUser>()
-              .HasMany(c => c.UserRoles)
+              .HasMany(c => c.CommunityMembers)
               .WithOne()
               .OnDelete(DeleteBehavior.Cascade);
             //modelBuilder.Entity<ApplicationUser>()

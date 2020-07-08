@@ -41,6 +41,12 @@ namespace CommunityToolShedCore
                 options.Filters.Add(new AuthorizeFilter(policy));
             }).AddXmlSerializerFormatters();
             services.AddScoped<IUserRepository, SQLUserRepository>();
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("DeleteRolePolicy",
+                                    policy => policy.RequireClaim("Delete Role")
+                                                    .RequireClaim("Create Role"));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

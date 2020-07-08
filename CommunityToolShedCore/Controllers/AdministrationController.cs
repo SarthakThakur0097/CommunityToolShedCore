@@ -1,5 +1,6 @@
 ﻿using CommunityToolShedCore.Models;
 using CommunityToolShedCore.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -12,9 +13,7 @@ using System.Threading.Tasks;
 namespace CommunityToolShedCore.Controllers
 {
 
-    //[Authorize(Roles ="Admin")]
-    //[Authorize(Roles = "Users")]
-
+    [Authorize(Roles ="Admin")]
     public class AdministrationController : Controller
     {
         private readonly RoleManager<IdentityRole> roleManager;
@@ -387,6 +386,8 @@ namespace CommunityToolShedCore.Controllers
             }
         }
 
+        [HttpPost]
+        [Authorize(Policy = "DeleteRolePolicy")]
         public async Task<IActionResult> DeleteRole(string id)
         {
             var role = await roleManager.FindByIdAsync(id);
