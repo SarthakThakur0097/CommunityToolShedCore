@@ -50,5 +50,10 @@ namespace CommunityToolShedCore.Models
 
             return communityChanges;
         }
+
+        public IList<ApplicationUser> GetAllCommunityMembersById(int id)
+        {
+            return null; 
+        }
     }
 }

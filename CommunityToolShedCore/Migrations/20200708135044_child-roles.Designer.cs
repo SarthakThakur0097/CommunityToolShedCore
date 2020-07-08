@@ -4,14 +4,16 @@ using CommunityToolShedCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CommunityToolShedCore.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20200708135044_child-roles")]
+    partial class childroles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -94,9 +96,9 @@ namespace CommunityToolShedCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "9f0a303a-bec5-49e5-a1be-aadd1627bef6",
+                            Id = "0e7f96ff-7991-41e2-a6bd-426ce78456d1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b068d97e-2e91-4c25-b407-ca0b04bf5adf",
+                            ConcurrencyStamp = "d14bb5eb-d1ad-4ed6-97be-f9768ac4e38c",
                             Email = "NeoAnderson@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Neo",
@@ -104,15 +106,15 @@ namespace CommunityToolShedCore.Migrations
                             LockoutEnabled = false,
                             PasswordHash = "AQAAAAEAACcQAAAAELq6+1vPzbk3Yo63sjNIa44iVvgombBvM0FCaj9vt7hHXWhaVI+ysn3URyl3jkx8kg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a666c04a-f2d6-4b54-ab32-58bd78eed94f",
+                            SecurityStamp = "10ea95eb-1503-44f2-b7cd-f159023ab4b8",
                             TwoFactorEnabled = false,
                             UserName = "NeoAnderson@gmail.com"
                         },
                         new
                         {
-                            Id = "60880b21-eca8-4797-a14d-fb4c6776de4a",
+                            Id = "d0032824-5791-4774-b83c-58839c9cf2a0",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b9c9fe6e-8e1b-4611-b32c-85ce33c143a4",
+                            ConcurrencyStamp = "6c01d4bd-8ce6-40cc-b761-5356ed0f6ef9",
                             Email = "DaveWill@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Dave",
@@ -120,15 +122,15 @@ namespace CommunityToolShedCore.Migrations
                             LockoutEnabled = false,
                             PasswordHash = "AQAAAAEAACcQAAAAELq6+1vPzbk3Yo63sjNIa44iVvgombBvM0FCaj9vt7hHXWhaVI+ysn3URyl3jkx8kg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d6746db4-c54d-481d-8406-da0ed6632ecb",
+                            SecurityStamp = "5067a29d-5557-4d8f-9d99-2116f12503ad",
                             TwoFactorEnabled = false,
                             UserName = "DaveWill@gmail.com"
                         },
                         new
                         {
-                            Id = "d564188c-891c-4a25-a76c-a4f7ce7c7f27",
+                            Id = "1be6d3fa-0401-42b9-8140-01f2f6ea3478",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "06607bfc-9e4b-4184-8800-5c8f08bdbc29",
+                            ConcurrencyStamp = "fca458d1-c4f6-42f9-be8c-01b9ba00a017",
                             Email = "SandraJosh@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Sandra",
@@ -136,7 +138,7 @@ namespace CommunityToolShedCore.Migrations
                             LockoutEnabled = false,
                             PasswordHash = "AQAAAAEAACcQAAAAELq6+1vPzbk3Yo63sjNIa44iVvgombBvM0FCaj9vt7hHXWhaVI+ysn3URyl3jkx8kg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "61faa331-6e41-4246-9146-512d6de13572",
+                            SecurityStamp = "3eb4a63b-b969-4c2d-8fe6-d70a2226448a",
                             TwoFactorEnabled = false,
                             UserName = "SandraJosh@gmail.com"
                         });
@@ -349,12 +351,12 @@ namespace CommunityToolShedCore.Migrations
                     b.HasOne("CommunityToolShedCore.Models.Community", "Community")
                         .WithMany("CommunityMembers")
                         .HasForeignKey("CommunityId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("CommunityToolShedCore.Models.ApplicationUser", "Member")
                         .WithMany("CommunityMembers")
                         .HasForeignKey("MemberId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -362,7 +364,7 @@ namespace CommunityToolShedCore.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -371,7 +373,7 @@ namespace CommunityToolShedCore.Migrations
                     b.HasOne("CommunityToolShedCore.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -380,7 +382,7 @@ namespace CommunityToolShedCore.Migrations
                     b.HasOne("CommunityToolShedCore.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -389,13 +391,13 @@ namespace CommunityToolShedCore.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("CommunityToolShedCore.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -404,7 +406,7 @@ namespace CommunityToolShedCore.Migrations
                     b.HasOne("CommunityToolShedCore.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

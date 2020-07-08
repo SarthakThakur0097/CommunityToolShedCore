@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace CommunityToolShedCore.Models
 {
@@ -9,14 +10,15 @@ namespace CommunityToolShedCore.Models
             Name = name;
             IsOpen = isOpen;
         }
-        public int Id { get; set; }
-        public string  Name { get; set; }
-        [Display(Name = "Open")]
-        public bool IsOpen { get; set; }
-
         public override string ToString()
         {
             return $"{Id}: {Name} ({(IsOpen ? "Open" : "Closed")})";
         }
+
+        public int Id { get; set; }
+        public string  Name { get; set; }
+        [Display(Name = "Open")]
+        public bool IsOpen { get; set; }
+        public ICollection<CommunityMember> CommunityMembers { get; set; }
     }
 }
