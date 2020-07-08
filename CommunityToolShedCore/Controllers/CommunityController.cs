@@ -64,13 +64,17 @@ namespace CommunityToolShedCore.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddMember(int communityId, string userId)
+        public IActionResult AddMember(string userJoiningId, int communityToJoinId)
         {
             using (_context)
             {
-                Community communityToJoin = new SQLCommunityRepository(_context).GetById(communityId);
-                ApplicationUser user = new SQLUserRepository(_context).GetById(userId);
+                CommunityMember communityMember = new CommunityMember(userJoiningId, communityToJoinId);
+                var joinCheck = new SQLCommunityMembersRepository(_context).Add(communityMember);
 
+                if(joinCheck != null)
+                {
+
+                }
             }
             return View();
         }

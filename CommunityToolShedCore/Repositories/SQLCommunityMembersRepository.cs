@@ -56,7 +56,7 @@ namespace CommunityToolShedCore.Repositories
         public IList<CommunityMember> GetAllMembersByCommunityId(int id)
         {
             return context.CommunityMembers
-                .Include(c => c.Member)
+                .Include(c => c.ApplicationUser)
                 .Include(c => c.Community)
                 .Where(c => c.Id == id)
                 .ToList();

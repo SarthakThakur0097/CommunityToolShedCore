@@ -24,8 +24,7 @@
                     @foreach (var communityMember in Model.CommunityMembers)
                     {
                         <tr>
-                            <td>(@communityMember.Member.FirstName + communityMember.Member.LastName)</td>
-                                
+                            <td>(@communityMember.ApplicationUser.FirstName + communityMember.ApplicationUser.LastName)</td>
                         </tr>
                     }
                 </tbody>
