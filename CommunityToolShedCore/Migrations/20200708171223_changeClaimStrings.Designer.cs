@@ -4,14 +4,16 @@ using CommunityToolShedCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CommunityToolShedCore.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20200708171223_changeClaimStrings")]
+    partial class changeClaimStrings
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -94,9 +96,9 @@ namespace CommunityToolShedCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "d716d249-366b-4578-8361-26d40be03794",
+                            Id = "a0ecb766-21ba-4a03-8f48-5b87eca955f7",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f764240d-6411-4f12-9f62-f010cc031fe6",
+                            ConcurrencyStamp = "3ccbc52b-b1cd-4614-a74f-d82a02a45ddd",
                             Email = "NeoAnderson@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Neo",
@@ -104,15 +106,15 @@ namespace CommunityToolShedCore.Migrations
                             LockoutEnabled = false,
                             PasswordHash = "AQAAAAEAACcQAAAAELq6+1vPzbk3Yo63sjNIa44iVvgombBvM0FCaj9vt7hHXWhaVI+ysn3URyl3jkx8kg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "81858c15-60a6-41d5-9f14-e53da6e80271",
+                            SecurityStamp = "85605418-18d0-4a2b-a99d-58cbb81a7223",
                             TwoFactorEnabled = false,
                             UserName = "NeoAnderson@gmail.com"
                         },
                         new
                         {
-                            Id = "e8cf649d-99d8-4131-9bb0-1121fc551bfc",
+                            Id = "497cd003-0abe-4a5d-8cdf-85d0c75ba587",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "61cbff59-a160-4448-9759-ed5147b733e6",
+                            ConcurrencyStamp = "cdabd821-404a-4634-8727-0e0b2a0f309e",
                             Email = "DaveWill@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Dave",
@@ -120,15 +122,15 @@ namespace CommunityToolShedCore.Migrations
                             LockoutEnabled = false,
                             PasswordHash = "AQAAAAEAACcQAAAAELq6+1vPzbk3Yo63sjNIa44iVvgombBvM0FCaj9vt7hHXWhaVI+ysn3URyl3jkx8kg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "f0557c72-79a0-408b-8799-6f9415d8aaeb",
+                            SecurityStamp = "a313289e-f3f8-433c-9abd-70b6c9d3d73a",
                             TwoFactorEnabled = false,
                             UserName = "DaveWill@gmail.com"
                         },
                         new
                         {
-                            Id = "e1419bea-179a-4fd4-b317-b09eb98d7887",
+                            Id = "5c966cf9-be28-4eca-a85e-5fdadde071e5",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7d8c5a0e-53e7-4489-bf15-e1850553ed51",
+                            ConcurrencyStamp = "4a4ebf2e-a0fb-479a-97b4-93ad5942bda6",
                             Email = "SandraJosh@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Sandra",
@@ -136,7 +138,7 @@ namespace CommunityToolShedCore.Migrations
                             LockoutEnabled = false,
                             PasswordHash = "AQAAAAEAACcQAAAAELq6+1vPzbk3Yo63sjNIa44iVvgombBvM0FCaj9vt7hHXWhaVI+ysn3URyl3jkx8kg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9711b7e4-1b4e-4c61-a6b3-a285a2ffd1be",
+                            SecurityStamp = "c8660330-4535-42f6-8ea6-c4f5c52f4a6c",
                             TwoFactorEnabled = false,
                             UserName = "SandraJosh@gmail.com"
                         });

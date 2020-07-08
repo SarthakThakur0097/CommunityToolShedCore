@@ -10,10 +10,10 @@ namespace CommunityToolShedCore.ViewModels
     {
         public UserClaimsViewModel()
         {
-            UserClaims = new List<UserClaim>();
+            Claims = new List<UserClaim>();
         }
 
         public string UserId { get; set; }
-        public List<UserClaim> UserClaims { get; set; }
+        public List<UserClaim> Claims { get; set; }
     }
 }

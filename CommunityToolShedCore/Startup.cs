@@ -8,7 +8,6 @@ using CommunityToolShedCore.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
-using CommunityToolShedCore.Data;
 
 namespace CommunityToolShedCore
 {
