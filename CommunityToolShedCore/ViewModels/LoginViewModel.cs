@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Authentication;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace CommunityToolShedCore.ViewModels
 {
@@ -14,5 +16,7 @@ namespace CommunityToolShedCore.ViewModels
 
         [Display(Name = "Remember me")]
         public bool RememberMe { get; set; }
+        public string ReturnUrl { get; set; }
+        public IList<AuthenticationScheme> ExternalLogins { get; set; }
     }
 }

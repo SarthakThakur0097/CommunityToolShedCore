@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
 using CommunityToolShedCore.Models;
 using CommunityToolShedCore.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -74,9 +76,15 @@ namespace CommunityToolShedCore.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult Login()
+        public async Task<IActionResult> Login(string returnUrl)
         {
-            return View();
+            LoginViewModel viewModel = new LoginViewModel
+            {
+                ReturnUrl = returnUrl,
+                ExternalLogins = (await signInManager.GetExternalAuthenticationSchemesAsync()).ToList()
+            };
+
+            return View(viewModel);
         }
 
         [HttpPost]
@@ -104,6 +112,86 @@ namespace CommunityToolShedCore.Controllers
             }
             return View(model);
         }
+
+        [AllowAnonymous]
+        [HttpPost]
+        public IActionResult ExternalLogin(string provider, string returnIrl)
+        {
+            var redirectUrl = Url.Action("ExternalLoginCallBack", "Account",
+                new { ReturnUrl = returnIrl });
+
+            var properties = signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
+
+            return new ChallengeResult(provider, properties);
+        }
+
+        [AllowAnonymous]
+        public async Task<IActionResult> ExternalLoginCallback(string returnUrl = null, string remoteError = null)
+        {
+            returnUrl = returnUrl ?? Url.Content("~/");
+
+            LoginViewModel viewModel = new LoginViewModel
+            {
+                ReturnUrl = returnUrl,
+                ExternalLogins = (await signInManager.GetExternalAuthenticationSchemesAsync()).ToList()
+            };
+
+            if(remoteError != null)
+            {
+                ModelState.AddModelError(string.Empty, $"Error frome external provider: {remoteError}");
+
+                return View("Login", viewModel);
+            }
+
+            var info = await signInManager.GetExternalLoginInfoAsync();
+            if(info == null)
+            {
+                ModelState.AddModelError(string.Empty, "Error loading external login information.");
+
+                return View("Login", viewModel);
+            }
+
+            var signInResult = await signInManager.ExternalLoginSignInAsync(info.LoginProvider,
+                info.ProviderKey, isPersistent: false, bypassTwoFactor: true);
+
+            if (signInResult.Succeeded)
+            {
+                return LocalRedirect(returnUrl);
+            }
+            else
+            {
+                var email = info.Principal.FindFirstValue(ClaimTypes.Email);
+
+                if(email != null)
+                {
+                    var user = await userManager.FindByEmailAsync(email);
+
+                    if(user == null)
+                    {
+                        user = new ApplicationUser
+                        {
+                            UserName = info.Principal.FindFirstValue(ClaimTypes.Email),
+                            Email = info.Principal.FindFirstValue(ClaimTypes.Email),
+                            FirstName = "Test Name",
+                            LastName = "Test Last Name"
+                        };
+
+                        await userManager.CreateAsync(user);
+                    }
+
+                    await userManager.AddLoginAsync(user, info);
+                    await signInManager.SignInAsync(user, isPersistent: false);
+
+                    return LocalRedirect(returnUrl);
+                }
+
+                ViewBag.ErrorTitle = $"Email claim not received from: {info.LoginProvider}";
+                ViewBag.ErrorMessage = "Please contact support on sarthak@sarthakthakur.com";
+
+                return View("Error");
+            }
+        }
+
         [HttpPost]
         public async Task<IActionResult> Logout()
         {
