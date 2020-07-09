@@ -24,8 +24,7 @@
                     @foreach (var communityMember in Model.CommunityMembers)
                     {
                         <tr>
-                            <td>(@communityMember.Member.FirstName + communityMember.Member.LastName)</td>
-                                
+                            <td>(@communityMember.ApplicationUser.FirstName + communityMember.ApplicationUser.LastName)</td>
                         </tr>
                     }
                 </tbody>
@@ -44,7 +43,7 @@ else
                 Use the button below to create a role
             </h5>
             <a class="btn btn-primary" style="width:auto"
-               asp-controller="Community" asp-action="AddMember">
+               asp-controller="Community" asp-action="AddMember" asp-route-communityId="@Model.CommunityId">
                 Add Member
             </a>
         </div>

@@ -1,4 +1,5 @@
 ﻿using CommunityToolShedCore.Models;
+using CommunityToolShedCore.Repositories;
 using CommunityToolShedCore.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -50,9 +51,11 @@ namespace CommunityToolShedCore.Controllers
         }
 
         [HttpGet]
-        public IActionResult AddMember()
+        public IActionResult AddMember(int communityId)
         {
             AddMemberViewModel viewModel = new AddMemberViewModel();
+            viewModel.CommunityId = communityId;
+
             using(_context)
             {
                 viewModel.AllUsers = new SQLUserRepository(_context).GetAllUsers();
@@ -61,19 +64,29 @@ namespace CommunityToolShedCore.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddMember(string id)
+        public IActionResult AddMember(string userJoiningId, int communityToJoinId)
         {
+            using (_context)
+            {
+                CommunityMember communityMember = new CommunityMember(userJoiningId, communityToJoinId);
+                var joinCheck = new SQLCommunityMembersRepository(_context).Add(communityMember);
 
+                if(joinCheck != null)
+                {
+
+                }
+            }
             return View();
         }
         
         [HttpGet]
-        public IActionResult Members(int Id)
+        public IActionResult Members(int id)
         {
             CommunityMembersViewModel viewModel = new CommunityMembersViewModel();
+            viewModel.CommunityId = id;
             using(_context)
             {
-                IList<CommunityMember> CommunityMembers = new SQLCommunityRepository(_context).GetAllMembersByCommunityId(Id);
+                IList<CommunityMember> CommunityMembers = new SQLCommunityRepository(_context).GetAllMembersByCommunityId(id);
 
                 viewModel.CommunityMembers = CommunityMembers;
  

@@ -4,14 +4,16 @@ using CommunityToolShedCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CommunityToolShedCore.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20200708184845_changingPasswordsForSeed")]
+    partial class changingPasswordsForSeed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -94,9 +96,9 @@ namespace CommunityToolShedCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "a29c434f-99c4-4cb3-a75a-42a4e31d519e",
+                            Id = "b0ecb515-c530-43ad-b1a4-0cf261ec1b33",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1f866947-ed80-4768-afdc-5d6c13a12cee",
+                            ConcurrencyStamp = "d977edd4-5dea-4007-bdf8-6823c91f4ffa",
                             Email = "NeoAnderson@sarthakthakur.com",
                             EmailConfirmed = false,
                             FirstName = "Neo",
@@ -104,15 +106,15 @@ namespace CommunityToolShedCore.Migrations
                             LockoutEnabled = false,
                             PasswordHash = "AQAAAAEAACcQAAAAEKvZsx7i2jprhRAFzfF9Vrifk2nnEawZiT0UJ7DBTAmWezV0vpp74XaEGdweV957LA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "2c1625b1-8de5-47f5-92a6-852aff823eff",
+                            SecurityStamp = "803cbb97-d656-4b51-b1aa-d79e23185ea0",
                             TwoFactorEnabled = false,
                             UserName = "NeoAnderson@sarthakthakur.com"
                         },
                         new
                         {
-                            Id = "386d073d-b0c7-40c5-9cfa-5552106f6487",
+                            Id = "cecf63dd-3757-4863-b894-507279eda35e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "29cac80e-4e03-460c-93d7-ef3ce4954395",
+                            ConcurrencyStamp = "dc4f560e-b68e-4115-9156-c963e9528465",
                             Email = "DaveWill@sarthakthakur.com",
                             EmailConfirmed = false,
                             FirstName = "Dave",
@@ -120,15 +122,15 @@ namespace CommunityToolShedCore.Migrations
                             LockoutEnabled = false,
                             PasswordHash = "AQAAAAEAACcQAAAAEKvZsx7i2jprhRAFzfF9Vrifk2nnEawZiT0UJ7DBTAmWezV0vpp74XaEGdweV957LA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "51b0c134-4515-4476-8d34-3f0f872d7892",
+                            SecurityStamp = "44e2e8e4-b677-4ae9-8d02-084991b95c57",
                             TwoFactorEnabled = false,
                             UserName = "DaveWill@sarthakthakur.com"
                         },
                         new
                         {
-                            Id = "81583477-b648-4d00-a0b4-45c1e38d237f",
+                            Id = "33cd15b4-9cf5-417f-903b-45e79315c9d1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "065c738b-6922-49e0-88c9-e3e226bd763c",
+                            ConcurrencyStamp = "27e3405c-4d4e-4d93-beb6-7e0b909f7d58",
                             Email = "SandraJosh@sarthakthakur.com",
                             EmailConfirmed = false,
                             FirstName = "Sandra",
@@ -136,7 +138,7 @@ namespace CommunityToolShedCore.Migrations
                             LockoutEnabled = false,
                             PasswordHash = "AQAAAAEAACcQAAAAEKvZsx7i2jprhRAFzfF9Vrifk2nnEawZiT0UJ7DBTAmWezV0vpp74XaEGdweV957LA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7e0ecf85-d473-47c4-a30b-351e12994622",
+                            SecurityStamp = "80dd898c-3a61-41ec-9729-0d023dd60938",
                             TwoFactorEnabled = false,
                             UserName = "SandraJosh@sarthakthakur.com"
                         });
@@ -193,19 +195,19 @@ namespace CommunityToolShedCore.Migrations
                     b.Property<string>("ApplicationUserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("ApplicationUserId1")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("CommunityId")
+                    b.Property<int?>("CommunityId")
                         .HasColumnType("int");
+
+                    b.Property<string>("MemberId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ApplicationUserId");
 
-                    b.HasIndex("ApplicationUserId1");
-
                     b.HasIndex("CommunityId");
+
+                    b.HasIndex("MemberId");
 
                     b.ToTable("CommunityMembers");
                 });
@@ -354,18 +356,16 @@ namespace CommunityToolShedCore.Migrations
                     b.HasOne("CommunityToolShedCore.Models.ApplicationUser", null)
                         .WithMany("CommunityMembers")
                         .HasForeignKey("ApplicationUserId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("CommunityToolShedCore.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany()
-                        .HasForeignKey("ApplicationUserId1")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("CommunityToolShedCore.Models.Community", "Community")
                         .WithMany("CommunityMembers")
                         .HasForeignKey("CommunityId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("CommunityToolShedCore.Models.ApplicationUser", "Member")
+                        .WithMany()
+                        .HasForeignKey("MemberId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

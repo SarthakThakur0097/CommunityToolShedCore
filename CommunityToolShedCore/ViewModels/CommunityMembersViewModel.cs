@@ -8,6 +8,7 @@ namespace CommunityToolShedCore.ViewModels
 {
     public class CommunityMembersViewModel
     {
+        public int CommunityId { get; set; }
         public IList<CommunityMember> CommunityMembers { get; set; }
     }
 }

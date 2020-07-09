@@ -13,6 +13,11 @@ namespace CommunityToolShedCore.Models
             this.context = context;
         }
 
+        public Community GetById(int Id)
+        {
+            return context.Communities.Find(Id);
+        }
+
         public Community Add(Community community)
         {
             context.Communities.Add(community);
@@ -37,15 +42,10 @@ namespace CommunityToolShedCore.Models
             return context.Communities;
         }
 
-        public Community GetById(string Id)
-        {
-            return context.Communities.Find(Id);
-        }
-
         public IList<CommunityMember> GetAllMembersByCommunityId(int id)
         {
             return context.CommunityMembers
-                .Include(c => c.Member)
+                .Include(c => c.ApplicationUser)
                 .Include(c => c.Community)
                 .Where(c => c.Id == id)
                 .ToList();
