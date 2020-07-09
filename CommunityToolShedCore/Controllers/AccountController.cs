@@ -91,8 +91,19 @@ namespace CommunityToolShedCore.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Login(LoginViewModel model, string returnUrl)
         {
+            model.ExternalLogins = (await signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
             if (ModelState.IsValid)
             {
+                var user = await userManager.FindByNameAsync(model.Email);
+
+                if (user != null && !user.EmailConfirmed &&
+                                    (await userManager.CheckPasswordAsync(user, model.Password)))
+                {
+                    ModelState.AddModelError(string.Empty, "Email not confirmed yet");
+
+                    return View(model);
+                }
                 var result = await signInManager.PasswordSignInAsync(model.Email, model.Password,
                     model.RememberMe, false);
 
