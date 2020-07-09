@@ -45,6 +45,7 @@ namespace CommunityToolShedCore
                 {
                     options.ClientId = "7797485727-rlte12cqu3fmf5lqlcdil6agjbermubt.apps.googleusercontent.com";
                     options.ClientSecret = "ILBhyrOsZp8ZLfO9-546zIjo";
+                    options.CallbackPath = "";
                 });
 
             services.AddScoped<IUserRepository, SQLUserRepository>();
