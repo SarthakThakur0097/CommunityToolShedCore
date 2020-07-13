@@ -6,6 +6,7 @@ using CommunityToolShedCore.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace CommunityToolShedCore.Controllers
 {
@@ -13,12 +14,15 @@ namespace CommunityToolShedCore.Controllers
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
+        private readonly ILogger<AccountController> logger;
 
         public AccountController(UserManager<ApplicationUser> userManager, 
-                                SignInManager<ApplicationUser> signInManager) 
+                                SignInManager<ApplicationUser> signInManager,
+                                ILogger<AccountController> logger) 
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
+            this.logger = logger;
         }
 
         [AcceptVerbs("Get", "Post")]
@@ -62,8 +66,23 @@ namespace CommunityToolShedCore.Controllers
 
                 if(result.Succeeded)
                 {
-                    await signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("Index", "Home");
+                    var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
+
+                    var confirmationLink = Url.Action("ConfirmEmail", "Account",
+                                            new { userId = user.Id, token = token }, Request.Scheme);
+
+                    logger.Log(LogLevel.Warning, confirmationLink);
+
+                    if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                    {
+                        return RedirectToAction("ListUsers", "Administration");
+                    }
+
+                    ViewBag.ErrorTitle = "Registration successful";
+                    ViewBag.ErrorMessage = "Before you can Login, please confirm your " +
+                        "email, by clicking on the confirmation link we have emailed you";
+
+                    return View("Error");
                 }
 
                 foreach(var error in result.Errors)
@@ -91,8 +110,19 @@ namespace CommunityToolShedCore.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Login(LoginViewModel model, string returnUrl)
         {
+            model.ExternalLogins = (await signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
             if (ModelState.IsValid)
             {
+                //var user = await userManager.FindByNameAsync(model.Email);
+
+                //if (user != null && !user.EmailConfirmed &&
+                //                    (await userManager.CheckPasswordAsync(user, model.Password)))
+                //{
+                //    ModelState.AddModelError(string.Empty, "Email not confirmed yet");
+
+                //    return View(model);
+                //}
                 var result = await signInManager.PasswordSignInAsync(model.Email, model.Password,
                     model.RememberMe, false);
 
@@ -151,6 +181,21 @@ namespace CommunityToolShedCore.Controllers
                 return View("Login", viewModel);
             }
 
+            var email = info.Principal.FindFirstValue(ClaimTypes.Email);
+            ApplicationUser user = null;
+
+            if(email != null)
+            {
+                user = await userManager.FindByEmailAsync(email);
+
+                if(user != null && !user.EmailConfirmed)
+                {
+                    ModelState.AddModelError(string.Empty, "Email not confirmed yet");
+
+                    return View("Login", viewModel);
+                }
+            }
+
             var signInResult = await signInManager.ExternalLoginSignInAsync(info.LoginProvider,
                 info.ProviderKey, isPersistent: false, bypassTwoFactor: true);
 
@@ -160,12 +205,8 @@ namespace CommunityToolShedCore.Controllers
             }
             else
             {
-                var email = info.Principal.FindFirstValue(ClaimTypes.Email);
-
                 if(email != null)
                 {
-                    var user = await userManager.FindByEmailAsync(email);
-
                     if(user == null)
                     {
                         user = new ApplicationUser

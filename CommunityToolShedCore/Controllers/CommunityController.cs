@@ -2,6 +2,7 @@
 using CommunityToolShedCore.Repositories;
 using CommunityToolShedCore.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 
@@ -71,12 +72,13 @@ namespace CommunityToolShedCore.Controllers
                 CommunityMember communityMember = new CommunityMember(userJoiningId, communityToJoinId);
                 var joinCheck = new SQLCommunityMembersRepository(_context).Add(communityMember);
 
-                if(joinCheck != null)
+                if(joinCheck == null)
                 {
-
+                    ModelState.AddModelError("Error", "This user is already a member of this community");
+                    
                 }
             }
-            return View();
+            return RedirectToAction("Members", new { id = communityToJoinId});
         }
         
         [HttpGet]
