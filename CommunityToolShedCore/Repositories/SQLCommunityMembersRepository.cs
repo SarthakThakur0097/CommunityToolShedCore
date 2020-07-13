@@ -25,6 +25,10 @@ namespace CommunityToolShedCore.Repositories
 
         public CommunityMember Add(CommunityMember communityMember)
         {
+            if (context.CommunityMembers.Any(o => o.ApplicationUserId == communityMember.ApplicationUserId &&
+                                                                o.CommunityId == communityMember.CommunityId)) 
+                return null;
+
             context.CommunityMembers.Add(communityMember);
             context.SaveChanges();
 

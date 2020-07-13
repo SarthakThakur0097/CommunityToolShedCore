@@ -9,7 +9,6 @@ namespace CommunityToolShedCore
     public class Context: IdentityDbContext<ApplicationUser>
     {
         public Context(DbContextOptions<Context> options) :base(options){}
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -20,10 +19,8 @@ namespace CommunityToolShedCore
                 foreignKey.DeleteBehavior = DeleteBehavior.Restrict;
             }
         }
-
         override public DbSet<ApplicationUser> Users { get; set; }
         public DbSet<Community> Communities { get; set; }
         public DbSet<CommunityMember> CommunityMembers { get; set; }
-
     }
 }

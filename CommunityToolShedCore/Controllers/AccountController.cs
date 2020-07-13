@@ -73,7 +73,7 @@ namespace CommunityToolShedCore.Controllers
 
                     logger.Log(LogLevel.Warning, confirmationLink);
 
-                    if(signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                    if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                     {
                         return RedirectToAction("ListUsers", "Administration");
                     }
@@ -114,15 +114,15 @@ namespace CommunityToolShedCore.Controllers
 
             if (ModelState.IsValid)
             {
-                var user = await userManager.FindByNameAsync(model.Email);
+                //var user = await userManager.FindByNameAsync(model.Email);
 
-                if (user != null && !user.EmailConfirmed &&
-                                    (await userManager.CheckPasswordAsync(user, model.Password)))
-                {
-                    ModelState.AddModelError(string.Empty, "Email not confirmed yet");
+                //if (user != null && !user.EmailConfirmed &&
+                //                    (await userManager.CheckPasswordAsync(user, model.Password)))
+                //{
+                //    ModelState.AddModelError(string.Empty, "Email not confirmed yet");
 
-                    return View(model);
-                }
+                //    return View(model);
+                //}
                 var result = await signInManager.PasswordSignInAsync(model.Email, model.Password,
                     model.RememberMe, false);
 
