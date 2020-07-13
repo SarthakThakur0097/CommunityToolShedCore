@@ -32,7 +32,9 @@ namespace CommunityToolShedCore
                 options.Password.RequiredUniqueChars = 3;
                 options.Password.RequireNonAlphanumeric = false;
                 options.SignIn.RequireConfirmedEmail = true;
-            }).AddEntityFrameworkStores<Context>();
+            })
+            .AddEntityFrameworkStores<Context>()
+            .AddDefaultTokenProviders();
 
             services.AddControllersWithViews();
             services.AddMvc(options => {
