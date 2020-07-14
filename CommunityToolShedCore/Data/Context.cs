@@ -22,5 +22,7 @@ namespace CommunityToolShedCore
         override public DbSet<ApplicationUser> Users { get; set; }
         public DbSet<Community> Communities { get; set; }
         public DbSet<CommunityMember> CommunityMembers { get; set; }
+        public DbSet<Tool> Tools { get; set; }
+        public DbSet<ToolApplicationUser> ToolApplicationUsers { get; set; }
     }
 }

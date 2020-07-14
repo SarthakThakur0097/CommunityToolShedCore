@@ -21,6 +21,7 @@ namespace CommunityToolShedCore.Models
         [Required]
         public string FirstName { get; set; }
         public ICollection<CommunityMember> CommunityMembers { get; set; }
+        public ICollection<ToolApplicationUser> ToolApplicationUsers { get; set; }
         public ICollection<ApplicationUserRole> UserRoles { get; set; }
     }
 }
