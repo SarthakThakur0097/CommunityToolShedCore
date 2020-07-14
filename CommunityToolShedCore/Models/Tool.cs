@@ -8,9 +8,10 @@ namespace CommunityToolShedCore.Models
     public class Tool
     {
         public Tool() { }
-        public Tool(string name)
+        public Tool(string name, string description)
         {
-
+            Name = name;
+            Description = description;
         }
         public int Id { get; set; }
         public string Name { get; set; }
