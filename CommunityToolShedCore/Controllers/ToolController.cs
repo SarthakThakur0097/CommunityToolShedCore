@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Identity;
 using CommunityToolShedCore.Repositories;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace CommunityToolShedCore.Controllers
