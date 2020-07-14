@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using CommunityToolShedCore.Models;
 using Microsoft.AspNetCore.Authorization;
+using System.Collections.Generic;
+using CommunityToolShedCore.ViewModels;
 
 namespace CommunityToolShedCore.Controllers
 {
@@ -20,7 +22,14 @@ namespace CommunityToolShedCore.Controllers
         [AllowAnonymous]
         public IActionResult Index()
         {
-            return View();
+            ListAllCommunitiesViewModel viewModel = new ListAllCommunitiesViewModel();
+
+            using(_context)
+            {
+                IList<Community> allCommunities = new SQLCommunityRepository(_context).GetAllCommunities();
+                viewModel.AllCommunities = allCommunities;
+            }
+            return View(viewModel);
         }
 
         public IActionResult Privacy()

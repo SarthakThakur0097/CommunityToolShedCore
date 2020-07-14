@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Identity;
 using CommunityToolShedCore.Repositories;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace CommunityToolShedCore.Controllers
 {
@@ -20,9 +22,14 @@ namespace CommunityToolShedCore.Controllers
         }
 
         [HttpGet]
-        public IActionResult ListAllTools()
+        public IActionResult ListAllToolsForCommunity(int communityId)
         {
-            return View();
+            ListToolsApplicationUserViewModel viewModel = new ListToolsApplicationUserViewModel(); 
+            using(_context)
+            {
+                IList<ToolCommunityMember> allTools = new SQLToolCommunityMemberRepository(_context).GetAllToolsByCommunityId(communityId);
+            }
+            return View(viewModel);
         }
 
         [HttpGet]

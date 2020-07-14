@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace CommunityToolShedCore.ViewModels
 {
-    public class ListToolsApplicationUserViewModel
+    public class ListAllCommunitiesViewModel
     {
-        public IList<ToolCommunityMember> ToolCommunityMembers { get; set; }
+        public IList<Community> AllCommunities { get; set; }
     }
 }
