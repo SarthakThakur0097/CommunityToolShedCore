@@ -28,8 +28,8 @@
                             <div class="card-body">
                                 <h5 class="card-title">@community.Name</h5>
                                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a class="btn btn-primary" asp-action="ListAllTools"
-                                   asp-controller="Community" asp-route-id="@community.Id">View All Tools</a>
+                                <a class="btn btn-primary" asp-action="ListAllToolsForCommunity"
+                                   asp-controller="Tool" asp-route-communityId="@community.Id">View All Tools</a>
                             </div>
                         </div>
                     }

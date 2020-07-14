@@ -27,7 +27,8 @@ namespace CommunityToolShedCore.Models
             return context.ToolCommunityMembers
                     .Include(t => t.Tool)
                     .Include(t => t.CommunityMember)
-                    .Where(t => t.CommunityMemberId == id)
+                    .Include(t => t.CommunityMember.Community)
+                    .Where(t => t.CommunityMember.CommunityId == id)
                     .ToList();
         }
         public ToolCommunityMember Add(ToolCommunityMember tool)

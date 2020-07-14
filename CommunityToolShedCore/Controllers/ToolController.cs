@@ -28,6 +28,9 @@ namespace CommunityToolShedCore.Controllers
             using(_context)
             {
                 IList<ToolCommunityMember> allTools = new SQLToolCommunityMemberRepository(_context).GetAllToolsByCommunityId(communityId);
+                viewModel.ToolCommunityMembers = allTools;
+                if(allTools.Count == 0) { }
+                    //TODO: Implement what happens when a community has members but no members have added any tools
             }
             return View(viewModel);
         }
