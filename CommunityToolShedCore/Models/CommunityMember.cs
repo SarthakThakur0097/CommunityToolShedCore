@@ -1,6 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 namespace CommunityToolShedCore.Models
+
 {
     public class CommunityMember
     {
@@ -16,5 +17,6 @@ namespace CommunityToolShedCore.Models
         public ApplicationUser ApplicationUser { get; set; }
         public int CommunityId { get; set; }
         public Community Community { get; set; }
+        public ICollection<ToolCommunityMember> ToolCommunityMembers { get; set; }
     }
 }

@@ -37,9 +37,9 @@ namespace CommunityToolShedCore.Models
             return community;
         }
 
-        public IEnumerable<Community> GetAllCommunities()
+        public IList<Community> GetAllCommunities()
         {
-            return context.Communities;
+            return context.Communities.ToList();
         }
 
         public IList<CommunityMember> GetAllMembersByCommunityId(int id)

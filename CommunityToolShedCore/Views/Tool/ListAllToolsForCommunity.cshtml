@@ -1,0 +1,45 @@
+﻿@model ListToolsApplicationUserViewModel
+@{
+    ViewData["Title"] = "ListAllToolsForCommunity";
+}
+
+
+@if (Model.ToolCommunityMembers.Any())
+{
+    <h1>All tools available in @Model.ToolCommunityMembers[0].CommunityMember.Community.Name</h1>
+
+    <a class="btn btn-primary mb-3" style="width:auto" asp-action="CreateRole"
+       asp-controller="Administration">Add new role</a>
+    foreach (var toolMember in Model.ToolCommunityMembers)
+    {
+        <div class="card mb-3">
+            <div class="card-header">
+                Tool Member Id : @toolMember.Id
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">@toolMember.Tool.Name</h5>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <div class="card">
+        <div class="card-header">
+            No members have added any tools yet
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">
+                Use the button below to add a tool
+            </h5>
+            <a class="btn btn-primary" style="width:auto"
+               asp-controller="Administration" asp-action="CreateRole">
+                Add Tool
+            </a>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    <script src="~/js/CustomScript.js"></script>
+}

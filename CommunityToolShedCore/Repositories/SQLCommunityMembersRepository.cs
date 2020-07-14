@@ -17,10 +17,16 @@ namespace CommunityToolShedCore.Repositories
             this.context = context;
         }
 
-
-        CommunityMember ICommunityMembersRepository.GetById(string Id)
+        public CommunityMember GetCommunityMemberByUserId(string id)
         {
-            return context.CommunityMembers.Find(Id);
+            return context.CommunityMembers
+                            .Include(c => c.Community)
+                            .Include(c => c.ApplicationUser)
+                            .SingleOrDefault(c => c.ApplicationUserId == id);
+        }
+        CommunityMember ICommunityMembersRepository.GetById(string id)
+        {
+            return context.CommunityMembers.Find(id);
         }
 
         public CommunityMember Add(CommunityMember communityMember)
