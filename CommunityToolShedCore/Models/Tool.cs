@@ -12,6 +12,7 @@ namespace CommunityToolShedCore.Models
         {
             Name = name;
             Description = description;
+            ToolApplicationUsers = new List<ToolApplicationUser>();
         }
         public int Id { get; set; }
         public string Name { get; set; }

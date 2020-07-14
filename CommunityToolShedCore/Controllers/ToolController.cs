@@ -36,12 +36,12 @@ namespace CommunityToolShedCore.Controllers
             {
                 
                 Tool toolToAdd = new Tool(viewModel.Name, viewModel.Description);
-                var toolAddCheck = new SQLToolRepository(_context).Add(toolToAdd);
-                ClaimsPrincipal currentUser = this.User;
                 var user = await _userManager.GetUserAsync(User);
-                //ToolApplicationUser toolApplicationUserToAdd = new ToolApplicationUser()
-                //var toolApplicationUserCheck = new SQLToolApplicationUserRepository(_context).Add()
-                var email = user.Email;
+                toolToAdd.ToolApplicationUsers.Add(new ToolApplicationUser 
+                                                    { ToolId = toolToAdd.Id, 
+                                                    ApplicationUserId = user.Id 
+                                                    });
+                var toolAddCheck = new SQLToolRepository(_context).Add(toolToAdd);
                 if (toolAddCheck == null)
                 {
                     //TODO: Implement
