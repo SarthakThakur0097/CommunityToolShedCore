@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using CommunityToolShedCore.Models;
 using CommunityToolShedCore.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
+using CommunityToolShedCore.Repositories;
 
 namespace CommunityToolShedCore.Controllers
 {
@@ -23,6 +20,12 @@ namespace CommunityToolShedCore.Controllers
         }
 
         [HttpGet]
+        public IActionResult ListAllTools()
+        {
+            return View();
+        }
+
+        [HttpGet]
         public IActionResult AddTool()
         {
             AddToolViewModel formModel = new AddToolViewModel();
@@ -34,13 +37,18 @@ namespace CommunityToolShedCore.Controllers
         {
             using(_context)
             {
-                
-                Tool toolToAdd = new Tool(viewModel.Name, viewModel.Description);
                 var user = await _userManager.GetUserAsync(User);
-                toolToAdd.ToolApplicationUsers.Add(new ToolApplicationUser 
-                                                    { ToolId = toolToAdd.Id, 
-                                                    ApplicationUserId = user.Id 
-                                                    });
+
+                Tool toolToAdd = new Tool(viewModel.Name, viewModel.Description);
+                CommunityMember communityMember = new SQLCommunityMembersRepository(_context).GetCommunityMemberByUserId(user.Id);
+                toolToAdd.ToolApplicationUsers.Add(new ToolCommunityMember
+                {
+                    ToolId = toolToAdd.Id,
+                    CommunityMemberId = communityMember.Id,
+                    IsBorrowed = false,
+                    IsOwner = true
+                });
+
                 var toolAddCheck = new SQLToolRepository(_context).Add(toolToAdd);
                 if (toolAddCheck == null)
                 {
@@ -49,7 +57,9 @@ namespace CommunityToolShedCore.Controllers
             }
             return View();
         }
-        public IActionResult UserTools(int id)
+
+        [HttpGet]
+        public IActionResult UserTools(string id)
         {
             using(_context)
             {

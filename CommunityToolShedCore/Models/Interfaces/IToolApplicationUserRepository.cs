@@ -4,10 +4,10 @@ namespace CommunityToolShedCore.Models.Interfaces
 {
     interface IToolApplicationUserRepository
     {
-        ToolApplicationUser GetById(int Id);
-        IEnumerable<ToolApplicationUser> GetAllTools();
-        ToolApplicationUser Add(ToolApplicationUser tool);
-        ToolApplicationUser Update(ToolApplicationUser toolToChange);
-        ToolApplicationUser Delete(string Id);
+        ToolCommunityMember GetById(int Id);
+        IEnumerable<ToolCommunityMember> GetAllTools();
+        ToolCommunityMember Add(ToolCommunityMember tool);
+        ToolCommunityMember Update(ToolCommunityMember toolToChange);
+        ToolCommunityMember Delete(string Id);
     }
 }

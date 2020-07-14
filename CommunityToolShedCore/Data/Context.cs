@@ -12,7 +12,7 @@ namespace CommunityToolShedCore
         public DbSet<Community> Communities { get; set; }
         public DbSet<CommunityMember> CommunityMembers { get; set; }
         public DbSet<Tool> Tools { get; set; }
-        public DbSet<ToolApplicationUser> ToolApplicationUsers { get; set; }
+        public DbSet<ToolCommunityMember> ToolCommunityMembers { get; set; }
 
         public Context(DbContextOptions<Context> options) :base(options){}
         protected override void OnModelCreating(ModelBuilder modelBuilder)

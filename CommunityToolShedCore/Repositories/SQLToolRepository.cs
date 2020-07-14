@@ -12,6 +12,10 @@ namespace CommunityToolShedCore.Models
         {
             this.context = context;
         }
+        public Tool GetById(int Id)
+        {
+            return context.Tools.Find(Id);
+        }
 
         public Tool Add(Tool tool)
         {
@@ -35,11 +39,6 @@ namespace CommunityToolShedCore.Models
         public IEnumerable<Tool> GetAllTools()
         {
             return context.Tools.ToList();
-        }
-
-        public Tool GetById(int Id)
-        {
-            return context.Tools.Find(Id);
         }
 
         public Tool Update(Tool toolToChange)
