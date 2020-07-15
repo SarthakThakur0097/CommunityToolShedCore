@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace CommunityToolShedCore.Models
 {
-    public class ApplicationUserRole: IdentityUserRole<string>
+    public class ApplicationRole: IdentityRole<Guid>
     {
-        public int Id { get; set; }
-        public ApplicationUser ApplicationUser { get; set; }
+        public string Description { get; set; }
     }
 }
