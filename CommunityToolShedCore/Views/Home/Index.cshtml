@@ -1,6 +1,7 @@
 ﻿@model ListAllCommunitiesViewModel
 @{
     ViewData["Title"] = "Home";
+
 }
 <div class="container">
     <div class="row">
@@ -23,8 +24,10 @@
                     <h5>There are currently @Model.AllCommunities.Count available on LongIsland</h5>
                     foreach (var community in Model.AllCommunities)
                     {
+                        var photoPath = "~/Images/" + (community.PhotoPath ?? "noimage.jpg");
+                        
                         <div class="card" style="width: 18rem;">
-                            <img class="card-img-top" src="..." alt="Card image cap">
+                            <img class="card-img-top imageThumbnail" src="@photoPath" asp-append-version="true" alt="Card image cap">
                             <div class="card-body">
                                 <h5 class="card-title">@community.Name</h5>
                                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>

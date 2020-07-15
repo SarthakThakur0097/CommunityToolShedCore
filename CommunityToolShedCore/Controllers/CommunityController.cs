@@ -1,20 +1,26 @@
 ﻿using CommunityToolShedCore.Models;
 using CommunityToolShedCore.Repositories;
 using CommunityToolShedCore.ViewModels;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace CommunityToolShedCore.Controllers
 {
     public class CommunityController : Controller
     {
         private readonly Context _context;
+        private readonly IHostingEnvironment hostingEnvironment;
         private readonly ILogger<HomeController> _logger;
 
-        public CommunityController(ILogger<HomeController> logger, Context context)
+        public CommunityController(ILogger<HomeController> logger, Context context,
+            IHostingEnvironment hostingEnvironment)
         {
             _context = context;
+            this.hostingEnvironment = hostingEnvironment;
         }
 
         [HttpGet]
@@ -43,7 +49,15 @@ namespace CommunityToolShedCore.Controllers
         {
             if (ModelState.IsValid)
             {
-                Community communityToAdd = new Community(model.Name, model.IsOpen);
+                string uniqueFileName = null;
+                if(model.Photo != null)
+                {
+                    string uploadsFolder = Path.Combine(hostingEnvironment.WebRootPath, "images");
+                    uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Photo.FileName;
+                    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                    model.Photo.CopyTo(new FileStream(filePath, FileMode.Create));
+                }
+                Community communityToAdd = new Community(model.Name, model.IsOpen, uniqueFileName);
                 using(_context){ new SQLCommunityRepository(_context).Add(communityToAdd); }
             }
 

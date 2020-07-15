@@ -25,17 +25,18 @@
         <header>
             <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
                 <div>
-                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
-                        <img src="~/images/maintenance.png" />
-                    </a>
+                    <div style="text-indent: 250px;">
+                        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                            <img src="~/images/maintenance.png" />
+                        </a>
+                    </div>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="navbar-collapse collapse d-sm-inline-flex flex">
                         <ul class="navbar-nav flex-grow-1">
-
-                            @if (signInManager.IsSignedIn(User) @*&& User.IsInRole("Admin")*@)
+                            @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                             {
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
@@ -48,6 +49,19 @@
                                         <a class="dropdown-item" asp-controller="Administration"
                                            asp-action="ListRoles">Roles</a>
                                         <a class="dropdown-item" asp-controller="Community"
+                                           asp-action="Index">Communities</a>
+                                    </div>
+                                </li>
+                            }
+                            else if (signInManager.IsSignedIn(User) /*&& User.IsInRole("CommunityMember")*/)
+                            {
+                               <li >
+                                    <div aria-labelledby="navbarDropdownMenuLink">
+                                        <a asp-controller="Administration"
+                                           asp-action="ListUsers">Users</a>
+                                        <a asp-controller="Administration"
+                                           asp-action="ListRoles">Roles</a>
+                                        <a asp-controller="Community"
                                            asp-action="Index">Communities</a>
                                     </div>
                                 </li>

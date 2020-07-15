@@ -3,6 +3,7 @@ using CommunityToolShedCore.Data;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using Microsoft.AspNetCore.Identity;
 
 namespace CommunityToolShedCore
 {
@@ -24,6 +25,24 @@ namespace CommunityToolShedCore
             {
                 foreignKey.DeleteBehavior = DeleteBehavior.Restrict;
             }
+
+            modelBuilder.Entity<Community>()
+                .HasMany<CommunityMember>(c => c.CommunityMembers)
+                .WithOne(cm => cm.Community)
+                .HasForeignKey(fk => fk.CommunityId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<ApplicationUser>()
+                .HasMany<CommunityMember>(c => c.CommunityMembers)
+                .WithOne(cm => cm.ApplicationUser)
+                .HasForeignKey(fk => fk.ApplicationUserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<ApplicationUser>()
+                .HasMany<ApplicationUserRole>(u => u.UserRoles)
+                .WithOne(ur => ur.ApplicationUser)
+                .HasForeignKey(fk => fk.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
 
     }

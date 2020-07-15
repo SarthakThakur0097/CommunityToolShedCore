@@ -5,10 +5,11 @@ namespace CommunityToolShedCore.Models
 {
     public class Community
     {
-        public Community(string name, bool isOpen)
+        public Community(string name, bool isOpen, string photoPath)
         {
             Name = name;
             IsOpen = isOpen;
+            PhotoPath = photoPath;
         }
         public override string ToString()
         {
@@ -19,6 +20,8 @@ namespace CommunityToolShedCore.Models
         public string  Name { get; set; }
         [Display(Name = "Open")]
         public bool IsOpen { get; set; }
+        public string PhotoPath { get; set; }
+
         public ICollection<CommunityMember> CommunityMembers { get; set; }
     }
 }
